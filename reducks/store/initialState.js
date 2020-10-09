@@ -1,5 +1,5 @@
-const initialState = {
-  reader: {},
+export const initialState = {
+  reader: {
+    barcode: 'barcode',
+  },
 };
-
-export default initialState;

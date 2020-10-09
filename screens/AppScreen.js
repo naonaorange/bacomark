@@ -13,11 +13,12 @@ const styles = StyleSheet.create({
 
 const AppScreen = (props) => {
   const { navigation } = props;
-  //const selector = useSelector((state) => state);
-  //const barcode = getBarcode(selector);
+  const selector = useSelector((state) => state);
+  const barcode = getBarcode(selector);
 
   return (
     <SafeAreaView style={styles.container}>
+      <Text>{barcode}</Text>
       <Button
         onPress={() => {
           navigation.navigate('Reader');

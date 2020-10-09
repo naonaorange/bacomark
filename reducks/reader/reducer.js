@@ -1,7 +1,5 @@
-import { initialState } from '../store';
+import { initialState } from '../store/initialState';
 
-const readerReducer = (state = initialState.reader, actions) => {
+export const ReaderReducer = (state = initialState.reader, action) => {
   return state;
 };
-
-export default readerReducer;

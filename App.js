@@ -2,10 +2,11 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
-import { store } from './reducks/store';
+import createStore from './reducks/store/store';
 import { AppScreen, ReaderScreen } from './screens';
 
 const Stack = createStackNavigator();
+const store = createStore();
 
 export default function App() {
   return (

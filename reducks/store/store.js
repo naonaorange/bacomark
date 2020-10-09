@@ -1,10 +1,10 @@
-import { createStore, combineReducers } from 'redux';
-import { readerReducer } from '../reader/reducer';
+import { createStore as reduxCreateStore, combineReducers } from 'redux';
+import { ReaderReducer } from '../reader/reducer';
 
-const rootReducer = combineReducers({
-  reader: readerReducer,
-});
-
-const store = createStore(rootReducer);
-
-export default store;
+export default function createStore() {
+  return reduxCreateStore(
+    combineReducers({
+      reader: ReaderReducer,
+    })
+  );
+}
