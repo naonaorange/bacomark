@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { StyleSheet, Text, SafeAreaView, Button } from 'react-native';
+import { getBarcode } from '../reducks/reader/selector';
 
 const styles = StyleSheet.create({
   container: {
@@ -9,14 +11,18 @@ const styles = StyleSheet.create({
   },
 });
 
-const AppScreen = () => {
+const AppScreen = (props) => {
+  const { navigation } = props;
+  //const selector = useSelector((state) => state);
+  //const barcode = getBarcode(selector);
+
   return (
     <SafeAreaView style={styles.container}>
       <Button
         onPress={() => {
-          alert('hello');
+          navigation.navigate('Reader');
         }}
-        title="hello"
+        title="Read the barcode"
       />
     </SafeAreaView>
   );

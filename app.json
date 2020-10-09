@@ -13,9 +13,10 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
+    "android": {
+      "permissions": ["CAMERA"]
+    },
     "ios": {
       "supportsTablet": true
     },
