@@ -11,7 +11,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     justifyContent: 'center',
   },
-  content: {},
+  content: {
+    padding: '10',
+  },
 });
 
 const HomeScreen = (props) => {
@@ -28,10 +30,10 @@ const HomeScreen = (props) => {
           <ListItem
             bottomDivider
             onPress={() => {
-              navigation.navigate('Shop');
+              navigation.navigate('Shop', { product: item });
             }}
           >
-            <Icon name="attachment" />
+            <Icon name="border-color" />
             <ListItem.Content>
               <ListItem.Title>{item}</ListItem.Title>
             </ListItem.Content>
