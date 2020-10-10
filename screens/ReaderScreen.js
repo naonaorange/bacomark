@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { StyleSheet, Text, SafeAreaView, View, Button } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import { searchProduct } from '../reducks/products/operations';
 
 const styles = StyleSheet.create({
   container: {
@@ -13,6 +15,7 @@ const styles = StyleSheet.create({
 const ReaderScreen = () => {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     (async () => {
@@ -23,7 +26,8 @@ const ReaderScreen = () => {
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    //alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    dispatch(searchProduct(data));
   };
 
   if (hasPermission === null) {

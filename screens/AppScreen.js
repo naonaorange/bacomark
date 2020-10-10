@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { StyleSheet, Text, SafeAreaView, Button } from 'react-native';
-import { getBarcode } from '../reducks/reader/selector';
+import { getProductsList } from '../reducks/products/selectors';
+import { searchProduct } from '../reducks/products/operations';
 
 const styles = StyleSheet.create({
   container: {
@@ -13,17 +14,24 @@ const styles = StyleSheet.create({
 
 const AppScreen = (props) => {
   const { navigation } = props;
+  const dispatch = useDispatch();
   const selector = useSelector((state) => state);
-  const barcode = getBarcode(selector);
+  const productsList = getProductsList(selector);
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text>{barcode}</Text>
+      <Text>{productsList}</Text>
       <Button
         onPress={() => {
           navigation.navigate('Reader');
         }}
         title="Read the barcode"
+      />
+      <Button
+        onPress={() => {
+          dispatch(searchProduct('aiueo'));
+        }}
+        title="debug"
       />
     </SafeAreaView>
   );
