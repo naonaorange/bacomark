@@ -3,6 +3,6 @@ export const initialState = {
     barcode: 'barcode',
   },
   products: {
-    productsList: 'pro',
+    products: [],
   },
 };

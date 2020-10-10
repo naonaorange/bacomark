@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { StyleSheet, Text, SafeAreaView, Button } from 'react-native';
-import { getProductsList } from '../reducks/products/selectors';
+import { ListItem, Icon } from 'react-native-elements';
+import { getProducts } from '../reducks/products/selectors';
 import { searchProduct } from '../reducks/products/operations';
 
 const styles = StyleSheet.create({
@@ -16,11 +17,21 @@ const AppScreen = (props) => {
   const { navigation } = props;
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
-  const productsList = getProductsList(selector);
+  const products = getProducts(selector);
+
+  const list = ['a', 'b'];
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text>{productsList}</Text>
+      {products.map((item, i) => (
+        <ListItem key={i} bottomDivider>
+          <Icon name="attachment" />
+          <ListItem.Content>
+            <ListItem.Title>{item}</ListItem.Title>
+          </ListItem.Content>
+          <ListItem.Chevron />
+        </ListItem>
+      ))}
       <Button
         onPress={() => {
           navigation.navigate('Reader');
