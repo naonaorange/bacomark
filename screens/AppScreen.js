@@ -29,7 +29,7 @@ const AppScreen = (props) => {
       />
       <Button
         onPress={() => {
-          dispatch(searchProduct('aiueo'));
+          dispatch(searchProduct('4901330512378'));
         }}
         title="debug"
       />
