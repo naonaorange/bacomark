@@ -2,9 +2,8 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { StyleSheet, Text, SafeAreaView, Button, FlatList } from 'react-native';
 import { ListItem, Avatar } from 'react-native-elements';
+import encoding from 'encoding-japanese';
 import * as WebBrowser from 'expo-web-browser';
-import { getProducts } from '../reducks/products/selectors';
-import { searchProduct, clearProduct } from '../reducks/products/operations';
 import merukariIcon from '../assets/images/mercari_icon.png';
 import rakumaIcon from '../assets/images/rakuma_icon.png';
 import paypayIcon from '../assets/images/paypay_icon.png';
@@ -20,8 +19,6 @@ const styles = StyleSheet.create({
 });
 
 const ShopScreen = (props) => {
-  const { navigation } = props;
-  const dispatch = useDispatch();
   const { route } = props;
   const { product } = route.params;
 
@@ -48,10 +45,22 @@ const ShopScreen = (props) => {
     },
   ];
 
+  const encodeToSjis = (unicodeStr) => {
+    const unicodeArray = [];
+    for (let i = 0; i < unicodeStr.length; i++) {
+      unicodeArray.push(unicodeStr.charCodeAt(i));
+    }
+    const sjisArray = encoding.convert(unicodeArray, {
+      to: 'SJIS',
+      from: 'UNICODE',
+    });
+    const encodedStr = encoding.urlEncode(sjisArray);
+    return encodedStr.replace(/%/g, '%25');
+  };
+
   const createUrl = ({ shop, product }) => {
     let url = '';
     const s = shops.find((i) => i.name === shop.name);
-
     switch (s.name) {
       case 'メルカリ':
         url = `${s.url}/search/?keyword=${product}`;
@@ -61,11 +70,10 @@ const ShopScreen = (props) => {
         url = `${s.url}/search/${product}`;
         break;
       case 'BOOK OFF Online':
-        url = `${s.url}/display/L001,q=%2582%25A0%2582%25A2%2582%25A4`;
-        //url = `${s.url}`;
+        url = `${s.url}/display/L001,st=a,q=${encodeToSjis('ハリー')}`;
+        alert(url);
         break;
     }
-
     return url;
   };
 
@@ -94,6 +102,24 @@ const ShopScreen = (props) => {
           </ListItem>
         )}
         keyExtractor={(item, index) => index.toString()}
+      />
+      <Button
+        onPress={() => {
+          const keyword = 'あ';
+          const unicodeArray = [];
+          for (let i = 0; i < keyword.length; i++) {
+            unicodeArray.push(keyword.charCodeAt(i));
+          }
+          const sjisArray = encoding.convert(unicodeArray, {
+            to: 'SJIS',
+            from: 'UNICODE',
+          });
+          const encodedKeyword = encoding.urlEncode(sjisArray);
+          const str = encodedKeyword.replace(/%/g, '%25');
+
+          alert(str);
+        }}
+        title="debug"
       />
     </SafeAreaView>
   );
