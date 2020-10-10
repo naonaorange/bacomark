@@ -6,3 +6,11 @@ export const addProduct = (product) => {
     product: product,
   };
 };
+
+export const CLEAR_PRODUCT = 'CLEAR_PRODUCT';
+
+export const clearProduct = () => {
+  return {
+    type: CLEAR_PRODUCT,
+  };
+};

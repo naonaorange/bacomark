@@ -25,3 +25,9 @@ export const searchProduct = (barcode) => {
     }
   };
 };
+
+export const clearProduct = () => {
+  return async (dispatch) => {
+    dispatch(Action.clearProduct());
+  };
+};

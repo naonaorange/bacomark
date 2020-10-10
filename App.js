@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import createStore from './reducks/store/store';
-import { HomeScreen, ReaderScreen } from './screens';
+import { HomeScreen, ShopScreen, ReaderScreen } from './screens';
 
 const Stack = createStackNavigator();
 const store = createStore();
@@ -14,6 +14,7 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Shop" component={ShopScreen} />
           <Stack.Screen name="Reader" component={ReaderScreen} />
         </Stack.Navigator>
       </NavigationContainer>

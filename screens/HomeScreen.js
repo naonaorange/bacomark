@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { StyleSheet, Text, SafeAreaView, Button, FlatList } from 'react-native';
 import { ListItem, Icon } from 'react-native-elements';
 import { getProducts } from '../reducks/products/selectors';
-import { searchProduct } from '../reducks/products/operations';
+import { searchProduct, clearProduct } from '../reducks/products/operations';
 
 const styles = StyleSheet.create({
   container: {
@@ -25,7 +25,12 @@ const HomeScreen = (props) => {
       <FlatList
         data={products}
         renderItem={({ item }) => (
-          <ListItem bottomDivider>
+          <ListItem
+            bottomDivider
+            onPress={() => {
+              navigation.navigate('Shop');
+            }}
+          >
             <Icon name="attachment" />
             <ListItem.Content>
               <ListItem.Title>{item}</ListItem.Title>
@@ -48,7 +53,14 @@ const HomeScreen = (props) => {
         onPress={() => {
           dispatch(searchProduct('4901330512378'));
         }}
-        title="debug"
+        title="add"
+      />
+      <Button
+        style={styles.content}
+        onPress={() => {
+          dispatch(clearProduct());
+        }}
+        title="clear"
       />
     </SafeAreaView>
   );
