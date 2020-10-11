@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { StyleSheet, Text, SafeAreaView, Button, FlatList } from 'react-native';
-import { ListItem, Icon as EleIcon } from 'react-native-elements';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { getProducts } from '../reducks/products/selectors';
 import { searchProduct, clearProduct } from '../reducks/products/operations';
+import { ListItem, Icon as EleIcon } from 'react-native-elements';
 
 const styles = StyleSheet.create({
   topItems: {

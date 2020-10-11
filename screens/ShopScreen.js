@@ -1,13 +1,10 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { StyleSheet, Text, SafeAreaView, Button, FlatList } from 'react-native';
+import React from 'react';
+import { StyleSheet, SafeAreaView, Button, FlatList } from 'react-native';
 import { ListItem, Avatar } from 'react-native-elements';
-import encoding from 'encoding-japanese';
 import * as WebBrowser from 'expo-web-browser';
 import merukariIcon from '../assets/images/mercari_icon.png';
 import rakumaIcon from '../assets/images/rakuma_icon.png';
 import paypayIcon from '../assets/images/paypay_icon.png';
-import bookoffIcon from '../assets/images/bookoff_icon.png';
 
 const styles = StyleSheet.create({
   container: {
@@ -15,13 +12,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     justifyContent: 'center',
   },
-  content: {},
 });
 
 const ShopScreen = (props) => {
   const { route } = props;
   const { product } = route.params;
-
   const shops = [
     {
       name: 'メルカリ',
@@ -38,25 +33,7 @@ const ShopScreen = (props) => {
       url: 'https://paypayfleamarket.yahoo.co.jp',
       icon: paypayIcon,
     },
-    {
-      name: 'BOOK OFF Online',
-      url: 'https://www.bookoffonline.co.jp',
-      icon: bookoffIcon,
-    },
   ];
-
-  const encodeToSjis = (unicodeStr) => {
-    const unicodeArray = [];
-    for (let i = 0; i < unicodeStr.length; i++) {
-      unicodeArray.push(unicodeStr.charCodeAt(i));
-    }
-    const sjisArray = encoding.convert(unicodeArray, {
-      to: 'SJIS',
-      from: 'UNICODE',
-    });
-    const encodedStr = encoding.urlEncode(sjisArray);
-    return encodedStr.replace(/%/g, '%25');
-  };
 
   const createUrl = ({ shop, product }) => {
     let url = '';
@@ -69,9 +46,7 @@ const ShopScreen = (props) => {
       case 'PayPayフリマ':
         url = `${s.url}/search/${product}`;
         break;
-      case 'BOOK OFF Online':
-        url = `${s.url}/display/L001,st=a,q=${encodeToSjis('ハリー')}`;
-        alert(url);
+      default:
         break;
     }
     return url;
@@ -83,7 +58,6 @@ const ShopScreen = (props) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text>{product}</Text>
       <FlatList
         data={shops}
         renderItem={({ item, index }) => (
@@ -102,24 +76,6 @@ const ShopScreen = (props) => {
           </ListItem>
         )}
         keyExtractor={(item, index) => index.toString()}
-      />
-      <Button
-        onPress={() => {
-          const keyword = 'あ';
-          const unicodeArray = [];
-          for (let i = 0; i < keyword.length; i++) {
-            unicodeArray.push(keyword.charCodeAt(i));
-          }
-          const sjisArray = encoding.convert(unicodeArray, {
-            to: 'SJIS',
-            from: 'UNICODE',
-          });
-          const encodedKeyword = encoding.urlEncode(sjisArray);
-          const str = encodedKeyword.replace(/%/g, '%25');
-
-          alert(str);
-        }}
-        title="debug"
       />
     </SafeAreaView>
   );
