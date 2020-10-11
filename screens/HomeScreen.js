@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { getProducts } from '../reducks/products/selectors';
 import { searchProduct, clearProduct } from '../reducks/products/operations';
 import { ListItem, Icon as EleIcon } from 'react-native-elements';
+import { MaterialIcons } from '@expo/vector-icons';
 
 const styles = StyleSheet.create({
   topItems: {
@@ -49,7 +50,7 @@ const HomeScreen = (props) => {
                 navigation.navigate('Shop', { product: item });
               }}
             >
-              <EleIcon name="border-color" />
+              <MaterialIcons name="create" size={24} color="black" />
               <ListItem.Content>
                 <ListItem.Title>{item}</ListItem.Title>
               </ListItem.Content>
@@ -62,9 +63,7 @@ const HomeScreen = (props) => {
       <ActionButton
         buttonColor="rgba(50,150,255,1)"
         renderIcon={() => {
-          return (
-            <Icon name="md-notifications-off" style={styles.actionButtonIcon} />
-          );
+          return <MaterialIcons name="camera-alt" size={32} color="white" />;
         }}
         onPress={() => {
           dispatch(searchProduct('4901330512378'));
