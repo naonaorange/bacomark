@@ -2,10 +2,9 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { StyleSheet, Text, SafeAreaView, Button, FlatList } from 'react-native';
 import ActionButton from 'react-native-action-button';
-import Icon from 'react-native-vector-icons/Ionicons';
 import { getProducts } from '../reducks/products/selectors';
 import { searchProduct, clearProduct } from '../reducks/products/operations';
-import { ListItem, Icon as EleIcon } from 'react-native-elements';
+import { ListItem } from 'react-native-elements';
 import { MaterialIcons } from '@expo/vector-icons';
 
 const styles = StyleSheet.create({

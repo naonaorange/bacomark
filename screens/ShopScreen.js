@@ -2,7 +2,6 @@ import React from 'react';
 import {
   StyleSheet,
   SafeAreaView,
-  Button,
   FlatList,
   Clipboard,
   Alert,
@@ -86,6 +85,7 @@ const ShopScreen = (props) => {
         Alert.alert('クリップボードにコピーしました', '', [{ text: 'OK' }], {
           cancelable: false,
         });
+        break;
       default:
         break;
     }
