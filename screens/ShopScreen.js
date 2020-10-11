@@ -5,6 +5,7 @@ import * as WebBrowser from 'expo-web-browser';
 import merukariIcon from '../assets/images/mercari_icon.png';
 import rakumaIcon from '../assets/images/rakuma_icon.png';
 import paypayIcon from '../assets/images/paypay_icon.png';
+import { MaterialIcons } from '@expo/vector-icons';
 
 const styles = StyleSheet.create({
   container: {
@@ -38,6 +39,12 @@ const ShopScreen = (props) => {
       operation: OPEN_BROWSER,
       url: 'https://paypayfleamarket.yahoo.co.jp',
       icon: paypayIcon,
+    },
+    {
+      name: 'クリップボードにコピー',
+      operation: COPY_TO_CLIP,
+      url: '',
+      icon: 'attach-file',
     },
   ];
 
@@ -84,7 +91,11 @@ const ShopScreen = (props) => {
               doOperation({ shop: item, product });
             }}
           >
-            <Avatar source={item.icon} />
+            {item.operation === OPEN_BROWSER ? (
+              <Avatar source={item.icon} />
+            ) : (
+              <MaterialIcons name={item.icon} size={24} color="black" />
+            )}
             <ListItem.Content>
               <ListItem.Title>{item.name}</ListItem.Title>
               <ListItem.Subtitle>{item.url}</ListItem.Subtitle>
