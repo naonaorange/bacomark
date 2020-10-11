@@ -13,12 +13,8 @@ export const searchProduct = (barcode) => {
       const response = await axios.get(url);
       if (response.status === 200) {
         product = response.data['hits'][0]['name'];
-      } else {
-        alert('正常に読み込めませんでした\nもう一度スキャンしてください');
       }
-    } catch {
-      alert('正常に読み込めませんでした\nもう一度スキャンしてください');
-    }
+    } catch {}
 
     if (product !== '') {
       dispatch(Action.addProduct(product));

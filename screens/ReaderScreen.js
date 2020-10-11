@@ -1,13 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import {
-  StyleSheet,
-  Text,
-  SafeAreaView,
-  View,
-  Button,
-  Alert,
-} from 'react-native';
+import { StyleSheet, Text, SafeAreaView, Alert } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { searchProduct } from '../reducks/products/operations';
 

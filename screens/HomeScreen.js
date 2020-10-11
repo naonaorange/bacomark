@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { StyleSheet, Text, SafeAreaView, Button, FlatList } from 'react-native';
 import ActionButton from 'react-native-action-button';
 import { getProducts } from '../reducks/products/selectors';
-import { searchProduct, clearProduct } from '../reducks/products/operations';
+import { clearProduct } from '../reducks/products/operations';
 import { ListItem } from 'react-native-elements';
 import { MaterialIcons } from '@expo/vector-icons';
 
@@ -65,7 +65,6 @@ const HomeScreen = (props) => {
           return <MaterialIcons name="camera-alt" size={32} color="white" />;
         }}
         onPress={() => {
-          //dispatch(searchProduct('4901330512378'));
           navigation.navigate('Reader');
         }}
       />
