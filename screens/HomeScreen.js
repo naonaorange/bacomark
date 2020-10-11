@@ -1,18 +1,24 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { StyleSheet, Text, SafeAreaView, Button, FlatList } from 'react-native';
-import { ListItem, Icon } from 'react-native-elements';
+import { ListItem, Icon as EleIcon } from 'react-native-elements';
+import ActionButton from 'react-native-action-button';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { getProducts } from '../reducks/products/selectors';
 import { searchProduct, clearProduct } from '../reducks/products/operations';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    justifyContent: 'center',
+  topItems: {
+    alignItems: 'flex-end',
+    backgroundColor: '#ffff',
   },
   content: {
-    padding: '10',
+    backgroundColor: '#ffff',
+  },
+  actionButtonIcon: {
+    fontSize: 20,
+    height: 22,
+    color: 'white',
   },
 });
 
@@ -23,48 +29,48 @@ const HomeScreen = (props) => {
   const products = getProducts(selector);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-        data={products}
-        renderItem={({ item }) => (
-          <ListItem
-            bottomDivider
-            onPress={() => {
-              navigation.navigate('Shop', { product: item });
-            }}
-          >
-            <Icon name="border-color" />
-            <ListItem.Content>
-              <ListItem.Title>{item}</ListItem.Title>
-            </ListItem.Content>
-            <ListItem.Chevron />
-          </ListItem>
-        )}
-        keyExtractor={(item, index) => index.toString()}
-      />
-
-      <Button
-        style={styles.content}
-        onPress={() => {
-          navigation.navigate('Reader');
+    <>
+      <SafeAreaView style={styles.topItems}>
+        <Button
+          onPress={() => {
+            dispatch(clearProduct());
+          }}
+          title="商品履歴の削除"
+        />
+      </SafeAreaView>
+      <SafeAreaView style={styles.content}>
+        <Text>商品リスト</Text>
+        <FlatList
+          data={products}
+          renderItem={({ item }) => (
+            <ListItem
+              bottomDivider
+              onPress={() => {
+                navigation.navigate('Shop', { product: item });
+              }}
+            >
+              <EleIcon name="border-color" />
+              <ListItem.Content>
+                <ListItem.Title>{item}</ListItem.Title>
+              </ListItem.Content>
+              <ListItem.Chevron />
+            </ListItem>
+          )}
+          keyExtractor={(item, index) => index.toString()}
+        />
+      </SafeAreaView>
+      <ActionButton
+        buttonColor="rgba(50,150,255,1)"
+        renderIcon={() => {
+          return (
+            <Icon name="md-notifications-off" style={styles.actionButtonIcon} />
+          );
         }}
-        title="Read the barcode"
-      />
-      <Button
-        style={styles.content}
         onPress={() => {
           dispatch(searchProduct('4901330512378'));
         }}
-        title="add"
       />
-      <Button
-        style={styles.content}
-        onPress={() => {
-          dispatch(clearProduct());
-        }}
-        title="clear"
-      />
-    </SafeAreaView>
+    </>
   );
 };
 
