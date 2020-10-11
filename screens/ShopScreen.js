@@ -5,6 +5,7 @@ import {
   Button,
   FlatList,
   Clipboard,
+  Alert,
 } from 'react-native';
 import { ListItem, Avatar } from 'react-native-elements';
 import * as WebBrowser from 'expo-web-browser';
@@ -82,7 +83,9 @@ const ShopScreen = (props) => {
         break;
       case COPY_TO_CLIP:
         Clipboard.setString(product);
-        alert('cliped');
+        Alert.alert('クリップボードにコピーしました', '', [{ text: 'OK' }], {
+          cancelable: false,
+        });
       default:
         break;
     }
