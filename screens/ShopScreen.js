@@ -1,5 +1,11 @@
 import React from 'react';
-import { StyleSheet, SafeAreaView, Button, FlatList } from 'react-native';
+import {
+  StyleSheet,
+  SafeAreaView,
+  Button,
+  FlatList,
+  Clipboard,
+} from 'react-native';
 import { ListItem, Avatar } from 'react-native-elements';
 import * as WebBrowser from 'expo-web-browser';
 import merukariIcon from '../assets/images/mercari_icon.png';
@@ -74,6 +80,9 @@ const ShopScreen = (props) => {
       case OPEN_BROWSER:
         openBrower(createUrl({ shop, product }));
         break;
+      case COPY_TO_CLIP:
+        Clipboard.setString(product);
+        alert('cliped');
       default:
         break;
     }
