@@ -17,23 +17,33 @@ const styles = StyleSheet.create({
 const ShopScreen = (props) => {
   const { route } = props;
   const { product } = route.params;
+  const OPEN_BROWSER = 'OPEN_BROWSER';
+  const COPY_TO_CLIP = 'COPY_TO_CLIP';
+
   const shops = [
     {
       name: 'メルカリ',
+      operation: OPEN_BROWSER,
       url: 'https://www.mercari.com/jp',
       icon: merukariIcon,
     },
     {
       name: 'ラクマ',
+      operation: OPEN_BROWSER,
       url: 'https://fril.jp',
       icon: rakumaIcon,
     },
     {
       name: 'PayPayフリマ',
+      operation: OPEN_BROWSER,
       url: 'https://paypayfleamarket.yahoo.co.jp',
       icon: paypayIcon,
     },
   ];
+
+  const openBrower = async (url) => {
+    let result = await WebBrowser.openBrowserAsync(url);
+  };
 
   const createUrl = ({ shop, product }) => {
     let url = '';
@@ -52,8 +62,14 @@ const ShopScreen = (props) => {
     return url;
   };
 
-  const openBrower = async (url) => {
-    let result = await WebBrowser.openBrowserAsync(url);
+  const doOperation = ({ shop, product }) => {
+    switch (shop.operation) {
+      case OPEN_BROWSER:
+        openBrower(createUrl({ shop, product }));
+        break;
+      default:
+        break;
+    }
   };
 
   return (
@@ -65,7 +81,7 @@ const ShopScreen = (props) => {
             key={index.toString()}
             bottomDivider
             onPress={() => {
-              openBrower(createUrl({ shop: item, product }));
+              doOperation({ shop: item, product });
             }}
           >
             <Avatar source={item.icon} />
