@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { StyleSheet, Text, SafeAreaView, View, Button } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  SafeAreaView,
+  View,
+  Button,
+  Alert,
+} from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { searchProduct } from '../reducks/products/operations';
 
@@ -12,7 +19,8 @@ const styles = StyleSheet.create({
   },
 });
 
-const ReaderScreen = () => {
+const ReaderScreen = (props) => {
+  const { navigation } = props;
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const dispatch = useDispatch();
@@ -28,6 +36,17 @@ const ReaderScreen = () => {
     setScanned(true);
     //alert(`Bar code with type ${type} and data ${data} has been scanned!`);
     dispatch(searchProduct(data));
+    Alert.alert(
+      'バーコードを読み取りました',
+      '',
+      [
+        { text: 'OK', onPress: () => navigation.navigate('Home') },
+        { text: 'Cancel', onPress: () => setScanned(false) },
+      ],
+      {
+        cancelable: false,
+      }
+    );
   };
 
   if (hasPermission === null) {
@@ -51,9 +70,6 @@ const ReaderScreen = () => {
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         style={StyleSheet.absoluteFillObject}
       />
-      {scanned && (
-        <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />
-      )}
     </SafeAreaView>
   );
 };

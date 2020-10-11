@@ -65,7 +65,8 @@ const HomeScreen = (props) => {
           return <MaterialIcons name="camera-alt" size={32} color="white" />;
         }}
         onPress={() => {
-          dispatch(searchProduct('4901330512378'));
+          //dispatch(searchProduct('4901330512378'));
+          navigation.navigate('Reader');
         }}
       />
     </>
