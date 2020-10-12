@@ -12,7 +12,10 @@ export const searchProduct = (barcode) => {
     try {
       const response = await axios.get(url);
       if (response.status === 200) {
-        product = response.data['hits'][0]['name'];
+        const data = response.data['hits'][0]['name'];
+        if (data !== 'undefined' && data !== 'null' && data !== '') {
+          product = data;
+        }
       }
     } catch {}
 

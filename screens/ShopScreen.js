@@ -11,6 +11,10 @@ import * as WebBrowser from 'expo-web-browser';
 import merukariIcon from '../assets/images/mercari_icon.png';
 import rakumaIcon from '../assets/images/rakuma_icon.png';
 import paypayIcon from '../assets/images/paypay_icon.png';
+import bookoffIcon from '../assets/images/bookoff_icon.png';
+import amazonIcon from '../assets/images/amazon_icon.png';
+import kakakucomIcon from '../assets/images/kakakucom_icon.png';
+import rakutenIcon from '../assets/images/rakuten_icon.png';
 import { MaterialIcons } from '@expo/vector-icons';
 
 const styles = StyleSheet.create({
@@ -26,28 +30,61 @@ const ShopScreen = (props) => {
   const { product } = route.params;
   const OPEN_BROWSER = 'OPEN_BROWSER';
   const COPY_TO_CLIP = 'COPY_TO_CLIP';
+  const OPEN_BROWSER_WITH_CLIP = 'OPEN_BROWSER_WITH_CLIP';
 
   const shops = [
     {
       name: 'メルカリ',
+      detail: '検索結果をブラウザで開きます',
       operation: OPEN_BROWSER,
       url: 'https://www.mercari.com/jp',
       icon: merukariIcon,
     },
     {
       name: 'ラクマ',
+      detail: '検索結果をブラウザで開きます',
       operation: OPEN_BROWSER,
       url: 'https://fril.jp',
       icon: rakumaIcon,
     },
     {
       name: 'PayPayフリマ',
+      detail: '検索結果をブラウザで開きます',
       operation: OPEN_BROWSER,
       url: 'https://paypayfleamarket.yahoo.co.jp',
       icon: paypayIcon,
     },
     {
+      name: 'Amazon',
+      detail: '検索結果をブラウザで開きます',
+      operation: OPEN_BROWSER,
+      url: 'https://www.amazon.co.jp',
+      icon: amazonIcon,
+    },
+    {
+      name: '楽天市場',
+      detail: '検索結果をブラウザで開きます',
+      operation: OPEN_BROWSER,
+      url: 'https://search.rakuten.co.jp',
+      icon: rakutenIcon,
+    },
+    {
+      name: '価格COM',
+      detail: '商品名をクリップボードにコピーして、\nHPをブラウザで開きます',
+      operation: OPEN_BROWSER_WITH_CLIP,
+      url: 'https://www.kakaku.com',
+      icon: kakakucomIcon,
+    },
+    {
+      name: 'BOOK OFF Online',
+      detail: '商品名をクリップボードにコピーして、\nHPをブラウザで開きます',
+      operation: OPEN_BROWSER_WITH_CLIP,
+      url: 'https://www.bookoffonline.co.jp',
+      icon: bookoffIcon,
+    },
+    {
       name: 'クリップボードにコピー',
+      detail: '',
       operation: COPY_TO_CLIP,
       url: '',
       icon: 'attach-file',
@@ -69,6 +106,11 @@ const ShopScreen = (props) => {
       case 'PayPayフリマ':
         url = `${s.url}/search/${product}`;
         break;
+      case 'Amazon':
+        url = `${s.url}/s?k=${product}`;
+      case '楽天市場':
+        url = `${s.url}/search/mall/${product}`;
+        break;
       default:
         break;
     }
@@ -86,9 +128,30 @@ const ShopScreen = (props) => {
           cancelable: false,
         });
         break;
+      case OPEN_BROWSER_WITH_CLIP:
+        Clipboard.setString(product);
+        Alert.alert(
+          'クリップボードにコピーしました',
+          '',
+          [
+            {
+              text: 'OK',
+              onPress: () => openBrower(shop.url),
+            },
+          ],
+          {
+            cancelable: false,
+          }
+        );
+        break;
       default:
         break;
     }
+  };
+
+  const typeEquals = (type, obj) => {
+    var clas = Object.prototype.toString.call(obj).slice(8, -1);
+    return clas === type;
   };
 
   return (
@@ -103,14 +166,14 @@ const ShopScreen = (props) => {
               doOperation({ shop: item, product });
             }}
           >
-            {item.operation === OPEN_BROWSER ? (
-              <Avatar source={item.icon} />
-            ) : (
+            {typeEquals('String', item.icon) ? (
               <MaterialIcons name={item.icon} size={24} color="black" />
+            ) : (
+              <Avatar source={item.icon} />
             )}
             <ListItem.Content>
               <ListItem.Title>{item.name}</ListItem.Title>
-              <ListItem.Subtitle>{item.url}</ListItem.Subtitle>
+              <ListItem.Subtitle>{item.detail}</ListItem.Subtitle>
             </ListItem.Content>
           </ListItem>
         )}
