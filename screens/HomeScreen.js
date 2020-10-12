@@ -39,7 +39,7 @@ const HomeScreen = (props) => {
         />
       </SafeAreaView>
       <SafeAreaView style={styles.content}>
-        <Text>商品リスト</Text>
+        <Text>商品履歴</Text>
         <FlatList
           data={products}
           renderItem={({ item }) => (
