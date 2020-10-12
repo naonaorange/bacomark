@@ -6,6 +6,6 @@ bacomark is the barcode scanner application. You can get the product name and se
 
 # Install
 
-# DEVELOPMENT ENVIROMNENTS
+# Development Environment
 This application is written in Javascript.
 Please see "package.json" file to check a dependency.
