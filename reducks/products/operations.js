@@ -1,6 +1,7 @@
 import axios from 'axios';
 import * as Action from './actions';
 import Constants from 'expo-constants';
+import { Alert } from 'react-native';
 
 const ROOT_URL =
   'https://shopping.yahooapis.jp/ShoppingWebService/V3/itemSearch';
@@ -19,7 +20,16 @@ export const searchProduct = (barcode) => {
       }
     } catch {}
 
-    if (product !== '') {
+    if (product === '') {
+      Alert.alert(
+        'バーコードを読み込むことができませんでした',
+        'もう一度お試しください',
+        [{ text: 'OK' }],
+        {
+          cancelable: false,
+        }
+      );
+    } else {
       dispatch(Action.addProduct(product));
     }
   };

@@ -27,19 +27,8 @@ const ReaderScreen = (props) => {
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    //alert(`Bar code with type ${type} and data ${data} has been scanned!`);
     dispatch(searchProduct(data));
-    Alert.alert(
-      'バーコードを読み取りました',
-      '',
-      [
-        { text: 'OK', onPress: () => navigation.navigate('Home') },
-        { text: 'Cancel', onPress: () => setScanned(false) },
-      ],
-      {
-        cancelable: false,
-      }
-    );
+    navigation.navigate('Home');
   };
 
   if (hasPermission === null) {
