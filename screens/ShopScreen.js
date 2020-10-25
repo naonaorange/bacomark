@@ -63,7 +63,7 @@ const ShopScreen = (props) => {
     },
     {
       name: 'Amazon',
-      detail: '検索結果をブラウザで開きます',
+      detail: '商品名をクリップボードにコピーして、\nHPをブラウザで開きます',
       operation: OPEN_BROWSER_WITH_CLIP,
       url: 'https://www.amazon.co.jp',
       icon: amazonIcon,
