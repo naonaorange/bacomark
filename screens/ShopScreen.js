@@ -55,19 +55,20 @@ const ShopScreen = (props) => {
       icon: paypayIcon,
     },
     {
-      name: 'Amazon',
-      detail: '検索結果をブラウザで開きます',
-      operation: OPEN_BROWSER,
-      url: 'https://www.amazon.co.jp',
-      icon: amazonIcon,
-    },
-    {
       name: '楽天市場',
       detail: '検索結果をブラウザで開きます',
       operation: OPEN_BROWSER,
       url: 'https://search.rakuten.co.jp',
       icon: rakutenIcon,
     },
+    {
+      name: 'Amazon',
+      detail: '検索結果をブラウザで開きます',
+      operation: OPEN_BROWSER_WITH_CLIP,
+      url: 'https://www.amazon.co.jp',
+      icon: amazonIcon,
+    },
+
     {
       name: '価格COM',
       detail: '商品名をクリップボードにコピーして、\nHPをブラウザで開きます',
