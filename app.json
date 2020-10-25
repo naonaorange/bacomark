@@ -17,6 +17,7 @@
     "android": {
       "permissions": ["CAMERA"],
       "package": "com.naonaorange.bacomark"
+      "versionCode": 2
     },
     "ios": {
       "supportsTablet": true
