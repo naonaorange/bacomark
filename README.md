@@ -7,7 +7,7 @@ bacomark is the barcode scanner application. You can get the product name and se
 # How to Use
 Please watch this movie.
 <div align="center">
-  <img src="https://user-images.githubusercontent.com/5310841/95860528-1e0a1000-0d9b-11eb-88b3-fb48f2a3abff.gif" width="320px" >
+  <img src="https://user-images.githubusercontent.com/5310841/97103472-12e6a680-16f0-11eb-8c90-8c567e17ff91.gif" width="320px" >
 </div>
 
 
