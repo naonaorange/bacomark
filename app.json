@@ -16,11 +16,13 @@
     "assetBundlePatterns": ["**/*"],
     "android": {
       "permissions": ["CAMERA"],
-      "package": "com.naonaorange.bacomark"
+      "package": "com.naonaorange.bacomark",
       "versionCode": 2
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.naonaorange.bacomark",
+      "buildNumber": "2.0.0"
     },
     "web": {
       "favicon": "./assets/favicon.png"
