@@ -2,7 +2,7 @@
   "expo": {
     "name": "bacomark",
     "slug": "bacomark",
-    "version": "2.0.0",
+    "version": "3.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -17,12 +17,17 @@
     "android": {
       "permissions": ["CAMERA"],
       "package": "com.naonaorange.bacomark",
-      "versionCode": 2
+      "versionCode": 3
     },
     "ios": {
       "supportsTablet": true,
+      "infoPlist": {
+        "CFBundleLocalizations" : ["ja"],
+        "CFBundleDevelopmentRegion" : "ja_JP",
+        "NSCameraUsageDescription": "This app uses the camera to scan barcodes on products."
+      },
       "bundleIdentifier": "com.naonaorange.bacomark",
-      "buildNumber": "2.0.0"
+      "buildNumber": "3.0.0"
     },
     "web": {
       "favicon": "./assets/favicon.png"
