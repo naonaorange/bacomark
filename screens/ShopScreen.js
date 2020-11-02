@@ -5,6 +5,7 @@ import {
   FlatList,
   Clipboard,
   Alert,
+  Text,
 } from 'react-native';
 import { ListItem, Avatar } from 'react-native-elements';
 import * as WebBrowser from 'expo-web-browser';
@@ -35,35 +36,30 @@ const ShopScreen = (props) => {
   const shops = [
     {
       name: 'メルカリ',
-      detail: '検索結果をブラウザで開きます',
-      operation: OPEN_BROWSER,
+      operation: OPEN_BROWSER_WITH_CLIP,
       url: 'https://www.mercari.com/jp',
       icon: merukariIcon,
     },
     {
       name: 'ラクマ',
-      detail: '検索結果をブラウザで開きます',
-      operation: OPEN_BROWSER,
+      operation: OPEN_BROWSER_WITH_CLIP,
       url: 'https://fril.jp',
       icon: rakumaIcon,
     },
     {
       name: 'PayPayフリマ',
-      detail: '検索結果をブラウザで開きます',
-      operation: OPEN_BROWSER,
+      operation: OPEN_BROWSER_WITH_CLIP,
       url: 'https://paypayfleamarket.yahoo.co.jp',
       icon: paypayIcon,
     },
     {
       name: '楽天市場',
-      detail: '検索結果をブラウザで開きます',
-      operation: OPEN_BROWSER,
+      operation: OPEN_BROWSER_WITH_CLIP,
       url: 'https://search.rakuten.co.jp',
       icon: rakutenIcon,
     },
     {
       name: 'Amazon',
-      detail: '商品名をクリップボードにコピーして、\nHPをブラウザで開きます',
       operation: OPEN_BROWSER_WITH_CLIP,
       url: 'https://www.amazon.co.jp',
       icon: amazonIcon,
@@ -71,21 +67,18 @@ const ShopScreen = (props) => {
 
     {
       name: '価格COM',
-      detail: '商品名をクリップボードにコピーして、\nHPをブラウザで開きます',
       operation: OPEN_BROWSER_WITH_CLIP,
       url: 'https://www.kakaku.com',
       icon: kakakucomIcon,
     },
     {
       name: 'BOOK OFF Online',
-      detail: '商品名をクリップボードにコピーして、\nHPをブラウザで開きます',
       operation: OPEN_BROWSER_WITH_CLIP,
       url: 'https://www.bookoffonline.co.jp',
       icon: bookoffIcon,
     },
     {
       name: 'クリップボードにコピー',
-      detail: '',
       operation: COPY_TO_CLIP,
       url: '',
       icon: 'attach-file',
@@ -157,6 +150,9 @@ const ShopScreen = (props) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Text></Text>
+      <Text>商品名をクリップボードにコピーしてサイトを開きます</Text>
+      <Text></Text>
       <FlatList
         data={shops}
         renderItem={({ item, index }) => (
@@ -174,7 +170,7 @@ const ShopScreen = (props) => {
             )}
             <ListItem.Content>
               <ListItem.Title>{item.name}</ListItem.Title>
-              <ListItem.Subtitle>{item.detail}</ListItem.Subtitle>
+              <ListItem.Subtitle>{item.url}</ListItem.Subtitle>
             </ListItem.Content>
           </ListItem>
         )}
